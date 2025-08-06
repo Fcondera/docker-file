@@ -1,0 +1,22 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./backend:/app
+    networks:
+      - pizzaria-network
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    networks:
+      - pizzaria-network
+
+networks:
+  pizzaria-network:
+    driver: bridge
